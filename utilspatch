@@ -1,0 +1,11 @@
+--- cl-original/test/utils.c	2016-05-06 10:13:04.000000000 +0100
++++ cl-patched/test/utils.c	2016-05-06 09:25:20.000000000 +0100
+@@ -1489,7 +1489,7 @@
+ 		const int innerLen = min( length - i, 16 );
+ 		int j;
+ 
+-		pos += sprintf( buffer + pos, prefix );
++		pos += sprintf( buffer + pos, "%s", prefix );
+ 		for( j = 0; j < innerLen; j++ )
+ 			pos += sprintf( buffer + pos, "%02X ", value[ i + j ] );
+ 		for( ; j < 16; j++ )

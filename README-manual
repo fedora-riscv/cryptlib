@@ -1,0 +1,26 @@
+Peter Gutmann has writen an excellent 374 page manual for Cryptlib.
+
+This manual provides code examples in C, Java, Python and other
+languages and detailed descriptions of the cryptlib security
+architecture, including the explanation of its High-, Medium-
+and Low-level interface. All information needed to add security
+services to existing applications is easily accessible with this
+manual.
+
+The manual has a very liberal copyright notice, that allows commercial
+use under the condition that the manual isn't distributed for a fee.
+
+
+Unfortunately, due to this use restriction it cannot be included in 
+the Fedora distribution.
+
+But the good news is, that you can download this excellent manual as a
+PDF file from Peter's web page.
+
+http://www.cypherpunks.to/~peter/manual.pdf
+
+If you refer to the numerous code examples, you will be able to use
+cryptlib in your own (commercial) projects quite easily.
+
+Ralf Senderek
+

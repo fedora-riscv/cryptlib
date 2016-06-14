@@ -1,0 +1,11 @@
+--- cl-original/tools/ccopts.sh	2016-03-04 17:54:34.000000000 +0000
++++ cl-patched/tools/ccopts.sh	2016-05-06 07:03:49.000000000 +0100
+@@ -604,7 +604,7 @@
+ 
+ if [ $GCC_VER -ge 42 ] ; then
+ 	if [ `$CC -fstack-protector -S -o /dev/null -xc /dev/null 2>&1 | grep -c "unrecog"` -eq 0 ] ; then
+-		CCARGS="$CCARGS -fstack-protector" ;
++		CCARGS="$CCARGS -fstack-protector-strong" ;
+ 	fi ;
+ 	CCARGS="$CCARGS -D_FORTIFY_SOURCE=2" ;
+ fi

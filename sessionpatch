@@ -1,0 +1,11 @@
+--- cl-original/session/ssh2_msg.c	2016-05-06 09:00:28.000000000 +0100
++++ cl-patched/session/ssh2_msg.c	2016-05-06 10:00:03.000000000 +0100
+@@ -368,7 +368,7 @@
+ 				totalLength += length;
+ 				}
+ 			retExt( CRYPT_ERROR_BADDATA,
+-					( CRYPT_ERROR_BADDATA, SESSION_ERRINFO, stringBuffer ) );
++					( CRYPT_ERROR_BADDATA, SESSION_ERRINFO, "%s", stringBuffer ) );
+ 			}
+ 		}
+ 
