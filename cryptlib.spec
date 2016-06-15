@@ -43,7 +43,11 @@ BuildRequires: python2-devel >= 2.7
     BuildRequires: python3-devel
 %endif
 BuildRequires: java-devel
-BuildRequires: perl, perl-generators 
+BuildRequires: perl
+%if 0%{?fedora} >= 23
+     BuildRequires: perl-generators
+%endif
+BuildRequires: perl-Data-Dumper
 BuildRequires: perl-ExtUtils-MakeMaker
 
 
