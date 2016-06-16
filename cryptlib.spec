@@ -6,7 +6,7 @@
 
 Name:       cryptlib
 Version:    3.4.3  
-Release:    5%{?dist}
+Release:    6%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -40,10 +40,14 @@ BuildRequires: coreutils
 BuildRequires: python >= 2.7
 BuildRequires: python2-devel >= 2.7
 %if %{with_python3}
-    BuildRequires: python3-devel
+BuildRequires: python3-devel
 %endif
 BuildRequires: java-devel
-BuildRequires: perl, perl-generators 
+BuildRequires: perl
+%if 0%{?fedora} >= 23
+BuildRequires: perl-generators
+%endif
+BuildRequires: perl-Data-Dumper
 BuildRequires: perl-ExtUtils-MakeMaker
 
 
@@ -324,6 +328,10 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+
+* Thu Jun 16 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-6
+- Remove perl-generators for epel7
+- Remove python3 script from test subpackage (fixes RHBZ #1347294)
 
 * Tue Jun 14 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-5
 - Fix source locations
