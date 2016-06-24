@@ -44,6 +44,7 @@ BuildRequires: python3-devel
 %endif
 BuildRequires: java-devel
 BuildRequires: perl
+BuildRequires: perl-devel
 %if 0%{?fedora} >= 23
 BuildRequires: perl-generators
 %endif
