@@ -6,7 +6,7 @@
 
 Name:       cryptlib
 Version:    3.4.3  
-Release:    6%{?dist}
+Release:    7%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -329,6 +329,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.4.3-7
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 
 * Thu Jun 16 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-6
 - Remove perl-generators for epel7
