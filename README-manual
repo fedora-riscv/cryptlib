@@ -22,5 +22,60 @@ http://www.cypherpunks.to/~peter/manual.pdf
 If you refer to the numerous code examples, you will be able to use
 cryptlib in your own (commercial) projects quite easily.
 
+As the manual is part of the documentation that is required to mention
+the contributions of other people to the source code of Cryptlib, I'll
+quote the Acknowledgement in full here:
+
+<quote>
+Acknowledgements
+
+Alexey Kirichenko provided information on NtQuerySystemInfo for randomness-
+gathering under WinNT/Win2K to avoid the need to access the buggy Windows
+registry performance counters.
+
+Brian Gladman wrote the AES code.
+
+Chris Wedgwood and Paul Kendall helped write the Unix random data gathering
+routines.
+
+endergone Zwiebeltüte helped debug the SSL/TLS implementation.
+
+Eric Young and the OpenSSL team wrote the conventional encryption and hashing
+code and bignum library.
+
+Jean-Loup Gailly and Mark Adler wrote the zlib compression code.
+
+Joerg Plate did the Amiga port.
+
+Markus F.X.J. Oberhumer did the 32-bit DOS port.
+
+Matt Thomlinson and Blake Coverett helped fix up and debug the Win32 random
+data gathering routines.
+
+Matthijs van Duin, Sascha Kratky, and Jeff Lamarche did the Macintosh Classic port.
+
+Nathan Hammond did the MVS port.
+
+Osma Ahvenlampi did the PPC BeOS port.
+
+Sami Tolvanen implemented the cryptlib GUI interface.
+
+Sriram Ramachandran did the Cygwin port.
+
+Steve Landers provided the Tcl bindings, with financial support from Eolas
+Technologies.
+
+Stuart Woolford and Mario Korva did the OS/2 port.
+
+Thomas Pornin did the ECDSA and ECDH code.
+
+Trevor Perrin did the C#, Java, and Python bindings.
+
+Wolfgang Gothier did the Delphi and Visual Basic bindings and tracked down a
+number of really obscure probl^H^H^H^H^Hundocumented features.
+
+</quote>
+
+
 Ralf Senderek
 
