@@ -6,11 +6,11 @@
 
 Name:       cryptlib
 Version:    3.4.3  
-Release:    6%{?dist}
+Release:    8%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
-License:    Sleepycat       
+License:    Sleepycat and OpenSSL     
 URL:        https://www.cs.auckland.ac.nz/~pgut001/cryptlib      
 Source0:    https://crypto-bone.com/fedora/cl343_fedora.zip      
 Source1:    https://crypto-bone.com/fedora/cl343_fedora.zip.sig
@@ -21,6 +21,8 @@ Source2:    gpgkey-3274CB29956498038A9C874BFBF6E2C28E9C98DD.asc
 Source3:    https://crypto-bone.com/fedora/README-manual
 Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
 Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
+Source6:    renamesymbols
+Source7:    COPYING
 
 Patch1:     sonamepatch
 # soname is now libcl.so.3
@@ -44,6 +46,7 @@ BuildRequires: python3-devel
 %endif
 BuildRequires: java-devel
 BuildRequires: perl
+BuildRequires: perl-devel
 %if 0%{?fedora} >= 23
 BuildRequires: perl-generators
 %endif
@@ -172,6 +175,8 @@ cd %{_builddir}/%{name}-%{version}/bindings
 
 %build
 cd %{name}-%{version}
+# rename cryptlib symbols that may collide with openssl symbols
+%{SOURCE6}
 # build java bindings
 chmod +x tools/mkhdr.sh
 tools/mkhdr.sh
@@ -221,6 +226,8 @@ mkdir -p %{buildroot}/%{_jnidir}
 cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}%{_jnidir}
 
 # install docs
+# apply the new license text
+cp %{SOURCE7} %{_builddir}/%{name}-%{version}/COPYING
 cp %{_builddir}/%{name}-%{version}/COPYING %{buildroot}%{_datadir}/licenses/%{name}
 cp %{_builddir}/%{name}-%{version}/README %{buildroot}%{_docdir}/%{name}/README
 echo "No tests performed." > %{_builddir}/%{name}-%{version}/stestlib.log
@@ -328,6 +335,13 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+
+* Tue Jul 26 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-8
+- change license tag (RHBZ #1352406)
+- rename symbols that collide with openssl (RHBZ #1352404)
+
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.4.3-7
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
 * Thu Jun 16 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-6
 - Remove perl-generators for epel7

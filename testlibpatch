@@ -1,5 +1,5 @@
 --- cl-original/test/testfunc.c	2016-06-03 13:23:35.294667665 +0200
-+++ cl-patched/test/testfunc.c	2016-06-03 13:26:42.320931385 +0200
++++ cl-patched/test/testfunc.c	2016-07-20 20:02:10.425573000 +0200
 @@ -1111,10 +1111,12 @@
  		}
  	if( !testSessionAttributes() )
@@ -13,3 +13,14 @@
  	if( !testSessionSSHPortforward() )
  		return( FALSE );
  	if( !testSessionSSHExec() )
+@@ -1141,8 +1143,10 @@
+ #endif /* 0 */
+ 	if( !testSessionOCSP() )
+ 		return( FALSE );
++#if 0		
+ 	if( !testSessionTSP() )
+ 		return( FALSE );
++#endif		
+ 	if( !testSessionEnvTSP() )
+ 		return( FALSE );
+ 	if( !testSessionCMP() )
