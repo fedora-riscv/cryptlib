@@ -6,7 +6,7 @@
 
 Name:       cryptlib
 Version:    3.4.3  
-Release:    8%{?dist}
+Release:    9%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -335,6 +335,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+
+* Tue Jan 31 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3-9
+- compile with gcc-7.0 and -march=native
 
 * Tue Jul 26 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-8
 - change license tag (RHBZ #1352406)
