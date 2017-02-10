@@ -6,7 +6,7 @@
 
 Name:       cryptlib
 Version:    3.4.3  
-Release:    9%{?dist}
+Release:    10%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -335,6 +335,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.3-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 
 * Tue Jan 31 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3-9
 - compile with gcc-7.0 and -march=native
