@@ -25,6 +25,7 @@ Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 # soname is now libcl.so.3.4
 Patch1:     ccflagspatch
 Patch2:     javapatch
+Patch3:     nativepatch
 
 ExclusiveArch: x86_64 %{ix86} %{arm}
 
@@ -154,6 +155,7 @@ cd %{name}-%{version}
 /usr/bin/unzip -a %{SOURCE0}
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
 # adapt perl files in bindings
