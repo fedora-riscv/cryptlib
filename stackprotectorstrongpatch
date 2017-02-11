@@ -1,5 +1,14 @@
---- cl-original/tools/ccopts.sh	2016-03-04 17:54:34.000000000 +0000
-+++ cl-patched/tools/ccopts.sh	2016-05-06 07:03:49.000000000 +0100
+--- cl-original/tools/ccopts.sh	2017-01-31 10:34:12.532287343 +0100
++++ cl-patched/tools/ccopts.sh	2017-01-31 13:02:39.088072895 +0100
+@@ -461,7 +461,7 @@
+ 				CCARGS="$CCARGS -march=pentium" ;;
+ 		esac ;
+ 	else
+-		CCARGS="$CCARGS -mcpu=pentium" ;
++		CCARGS="$CCARGS -march=native" ;
+ 	fi ;
+ fi
+ 
 @@ -604,7 +604,7 @@
  
  if [ $GCC_VER -ge 42 ] ; then

@@ -5,15 +5,15 @@
 %global with_python3 0
 
 Name:       cryptlib
-Version:    3.4.3  
-Release:    8%{?dist}
+Version:    3.4.3.1  
+Release:    1%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
 License:    Sleepycat and OpenSSL     
 URL:        https://www.cs.auckland.ac.nz/~pgut001/cryptlib      
-Source0:    https://crypto-bone.com/fedora/cl343_fedora.zip      
-Source1:    https://crypto-bone.com/fedora/cl343_fedora.zip.sig
+Source0:    https://crypto-bone.com/fedora/cl3431_fedora.zip      
+Source1:    https://crypto-bone.com/fedora/cl3431_fedora.zip.sig
 # for security reasons a public signing key should always be stored in distgit
 # and never be used with a URL to make impersonation attacks harder
 # (verified: https://senderek.ie/keys/codesigningkey)
@@ -21,17 +21,11 @@ Source2:    gpgkey-3274CB29956498038A9C874BFBF6E2C28E9C98DD.asc
 Source3:    https://crypto-bone.com/fedora/README-manual
 Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
 Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
-Source6:    renamesymbols
-Source7:    COPYING
 
-Patch1:     sonamepatch
-# soname is now libcl.so.3
-Patch2:     ccflagspatch
-Patch3:     sessionpatch
-Patch4:     utilspatch
-Patch5:     stackprotectorstrongpatch
-Patch6:     javapatch
-Patch7:     testlibpatch
+# soname is now libcl.so.3.4
+Patch1:     ccflagspatch
+Patch2:     javapatch
+Patch3:     nativepatch
 
 ExclusiveArch: x86_64 %{ix86} %{arm}
 
@@ -162,10 +156,6 @@ cd %{name}-%{version}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
 # adapt perl files in bindings
@@ -175,11 +165,12 @@ cd %{_builddir}/%{name}-%{version}/bindings
 
 %build
 cd %{name}-%{version}
-# rename cryptlib symbols that may collide with openssl symbols
-%{SOURCE6}
-# build java bindings
 chmod +x tools/mkhdr.sh
 tools/mkhdr.sh
+# rename cryptlib symbols that may collide with openssl symbols
+chmod +x tools/rename.sh
+tools/rename.sh
+# build java bindings
 cp /etc/alternatives/java_sdk/include/jni.h .
 cp /etc/alternatives/java_sdk/include/linux/jni_md.h .
 
@@ -211,8 +202,8 @@ mkdir -p %{buildroot}%{_datadir}/licenses/%{name}
 mkdir -p %{buildroot}%{_docdir}/%{name}
 cp %{_builddir}/%{name}-%{version}/libcl.so.3.4.3 %{buildroot}%{_libdir}
 cd %{buildroot}%{_libdir}
-ln -s libcl.so.3.4.3 libcl.so.3
-ln -s libcl.so.3 libcl.so
+ln -s libcl.so.3.4.3 libcl.so.3.4
+ln -s libcl.so.3.4 libcl.so
 
 # install header files
 mkdir -p %{buildroot}/%{_includedir}/%{name}
@@ -226,8 +217,6 @@ mkdir -p %{buildroot}/%{_jnidir}
 cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}%{_jnidir}
 
 # install docs
-# apply the new license text
-cp %{SOURCE7} %{_builddir}/%{name}-%{version}/COPYING
 cp %{_builddir}/%{name}-%{version}/COPYING %{buildroot}%{_datadir}/licenses/%{name}
 cp %{_builddir}/%{name}-%{version}/README %{buildroot}%{_docdir}/%{name}/README
 echo "No tests performed." > %{_builddir}/%{name}-%{version}/stestlib.log
@@ -253,6 +242,7 @@ mkdir -p %{buildroot}%{_mandir}/man3
 cd %{_builddir}/%{name}-%{version}/bindings
 mkdir -p %{_builddir}/include
 cp ../cryptlib.h %{_builddir}/include
+cp ../tools/GenPerl.pl .
 export PERL_CRYPT_LIB_HEADER=%{_builddir}/include/cryptlib.h
 /usr/bin/perl Makefile.PL
 sed -i '/LDLOADLIBS = /s/thread/thread -L.. -lcl/' Makefile
@@ -282,7 +272,7 @@ tar xpzf %{SOURCE4}
 # in KOJI tests must be disabled as there is no networking
 %if %{includetests}
      cd %{_builddir}/%{name}-%{version}
-     ln -s libcl.so.3.4.3 ./libcl.so.3
+     ln -s libcl.so.3.4.3 ./libcl.so.3.4
      export LD_LIBRARY_PATH=.
      echo "Running tests on the cryptlib library. This will take a few minutes."
      echo "Network access is necessary to complete all tests!"
@@ -298,7 +288,8 @@ tar xpzf %{SOURCE4}
 
 %files
 %{_libdir}/libcl.so.3.4.3
-%{_libdir}/libcl.so.3
+%{_libdir}/libcl.so.3.4
+%{_libdir}/libcl.so
 
 %license   %{_datadir}/licenses/%{name}/COPYING
 %doc       %{_docdir}/%{name}/README
@@ -335,6 +326,15 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+
+* Sat Feb 11 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-1
+- update to version 3.4.3.1
+
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.3-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Tue Jan 31 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3-9
+- compile with gcc-7.0 and -march=native
 
 * Tue Jul 26 2016 Senderek Web Security <innovation@senderek.ie> - 3.4.3-8
 - change license tag (RHBZ #1352406)
