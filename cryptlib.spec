@@ -6,7 +6,7 @@
 
 Name:       cryptlib
 Version:    3.4.3.1  
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -326,6 +326,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Sun Jun 04 2017 Jitka Plesnikova <jplesnik@redhat.com> - 3.4.3.1-2
+- Perl 5.26 rebuild
+
 
 * Sat Feb 11 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-1
 - update to version 3.4.3.1
