@@ -27,7 +27,8 @@ Patch1:     ccflagspatch
 Patch2:     javapatch
 Patch3:     nativepatch
 
-ExclusiveArch: x86_64 %{ix86} aarch64 ppc64
+ExclusiveArch: x86_64 %{ix86} aarch64 
+# arch ppc64 is deliberately excluded, because bignum assembler code fails to compile
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
