@@ -331,6 +331,9 @@ tar xpzf %{SOURCE4}
 * Wed Jul 05 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-3
 - include aarch64 and exclude ppc64 
 
+* Sun Jun 04 2017 Jitka Plesnikova <jplesnik@redhat.com> - 3.4.3.1-2
+- Perl 5.26 rebuild
+
 * Sat Feb 11 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-1
 - update to version 3.4.3.1
 
