@@ -326,9 +326,6 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
-* Sun Jun 04 2017 Jitka Plesnikova <jplesnik@redhat.com> - 3.4.3.1-2
-- Perl 5.26 rebuild
-
 
 * Wed Jul 05 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-2
 - including arches aarch64 and ppc64 
