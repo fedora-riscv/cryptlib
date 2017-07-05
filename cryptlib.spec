@@ -329,7 +329,7 @@ tar xpzf %{SOURCE4}
 %changelog
 
 * Wed Jul 05 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-2
-- including arches aarch64 and ppc64 
+- include aarch64 and exclude ppc64 
 
 * Sat Feb 11 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-1
 - update to version 3.4.3.1
