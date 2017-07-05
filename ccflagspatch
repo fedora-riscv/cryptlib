@@ -1,5 +1,5 @@
---- cl-original/makefile	2016-03-25 03:33:28.000000000 +0000
-+++ cl-patched/makefile	2016-05-05 13:17:15.000000000 +0100
+--- cl-original/makefile	2017-02-10 20:01:44.169832047 +0100
++++ cl-patched/makefile	2017-02-10 20:04:05.578130793 +0100
 @@ -90,7 +90,7 @@
  # Further cc flags are gathered dynamically at runtime via the ccopts.sh
  # script.
