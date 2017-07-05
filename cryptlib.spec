@@ -6,7 +6,7 @@
 
 Name:       cryptlib
 Version:    3.4.3.1  
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -27,7 +27,7 @@ Patch1:     ccflagspatch
 Patch2:     javapatch
 Patch3:     nativepatch
 
-ExclusiveArch: x86_64 %{ix86} %{arm}
+ExclusiveArch: x86_64 %{ix86} aarch64 ppc64
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
@@ -326,6 +326,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+
+* Wed Jul 05 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-2
+- including arches aarch64 and ppc64 
 
 * Sat Feb 11 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-1
 - update to version 3.4.3.1
