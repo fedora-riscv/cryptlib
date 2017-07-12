@@ -40,7 +40,7 @@ BuildRequires: python2-devel >= 2.7
 BuildRequires: python3-devel
 %endif
 BuildRequires: java-devel
-BuildRequires: perl
+BuildRequires: perl-interpreter
 BuildRequires: perl-devel
 %if 0%{?fedora} >= 23
 BuildRequires: perl-generators
