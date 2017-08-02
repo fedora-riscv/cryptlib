@@ -28,7 +28,7 @@ Patch3:     nativepatch
 Patch4:     bignumpatch
 
 
-ExclusiveArch: x86_64 %{ix86} aarch64 ppc64
+ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
@@ -316,6 +316,7 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+
 * Wed Aug 02 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-5
 - include ppc64/ppc64le and building the python3 module
 
