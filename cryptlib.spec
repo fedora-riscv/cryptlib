@@ -225,7 +225,7 @@ cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python2_version}/
 
 # install python3 module
 mkdir -p %{buildroot}%{python3_sitelib}
-cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python3_version}/cryptlib_py.cpython-3*-x86_64-linux-gnu.so %{buildroot}%{python3_sitelib}/cryptlib_py.so
+cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python3_version}/cryptlib_py.cpython-3*-%{_arch}-linux-gnu.so %{buildroot}%{python3_sitelib}/cryptlib_py.so
 
 # install Perl module
 mkdir -p %{buildroot}/usr/local/lib64
