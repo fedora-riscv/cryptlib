@@ -9,3 +9,5 @@
 /ccflagspatch
 /javapatch
 /nativepatch
+/cryptlibConverter.py
+/bignumpatch
