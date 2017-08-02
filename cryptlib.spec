@@ -1,12 +1,10 @@
 %global includetests 0
 # 0=no, 1=yes
 %global cryptlibdir %{_libdir}/%{name}
-# The python3 subpackage cannot be build, because DL_EXPORT is missing in Python.h
-%global with_python3 0
 
 Name:       cryptlib
 Version:    3.4.3.1  
-Release:    3%{?dist}
+Release:    5%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -21,14 +19,16 @@ Source2:    gpgkey-3274CB29956498038A9C874BFBF6E2C28E9C98DD.asc
 Source3:    https://crypto-bone.com/fedora/README-manual
 Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
 Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
+Source6:    https://crypto-bone.com/fedora/cryptlibConverter.py
 
 # soname is now libcl.so.3.4
 Patch1:     ccflagspatch
 Patch2:     javapatch
 Patch3:     nativepatch
+Patch4:     bignumpatch
 
-ExclusiveArch: x86_64 %{ix86} aarch64 
-# arch ppc64 is deliberately excluded, because bignum assembler code fails to compile
+
+ExclusiveArch: x86_64 %{ix86} aarch64 ppc64
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
@@ -36,11 +36,9 @@ BuildRequires: gnupg2
 BuildRequires: coreutils
 BuildRequires: python >= 2.7
 BuildRequires: python2-devel >= 2.7
-%if %{with_python3}
 BuildRequires: python3-devel
-%endif
 BuildRequires: java-devel
-BuildRequires: perl
+BuildRequires: perl-interpreter
 BuildRequires: perl-devel
 %if 0%{?fedora} >= 23
 BuildRequires: perl-generators
@@ -110,26 +108,20 @@ Cryptlib Javadoc information
 Summary:  Cryptlib bindings for python2
 Group:    System Environment/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
-Requires: python >= 2.7
+Requires: python2 >= 2.7
 
 %description python2
 Cryptlib module for application development in Python 2
 
 
-# The python3 subpackage cannot be build, because DL_EXPORT is missing in Python.h
-# so python3 setup.py build fails
+%package python3
+Summary:  Cryptlib bindings for python3
+Group:    System Environment/Libraries
+Requires: %{name}%{?_isa} = %{version}-%{release}
+Requires: python3 >= 3.5  
 
-%if %{with_python3}
-     %package python3
-     Summary:  Cryptlib bindings for python3
-     Group:    System Environment/Libraries
-     Requires: %{name}%{?_isa} = %{version}-%{release}
-     # specify the python3 version which first provides DL_EXPORT support below
-     Requires: python >= 3.x  
-
-     %description python3
-     Cryptlib module for application development in Python 3
-%endif
+%description python3
+Cryptlib module for application development in Python 3
 
 %package perl
 Summary:  Cryptlib bindings for perl
@@ -154,15 +146,18 @@ rm -rf %{name}-%{version}
 mkdir %{name}-%{version}
 cd %{name}-%{version}
 /usr/bin/unzip -a %{SOURCE0}
+# use the re-written python.c to support python3
+cp %{SOURCE6} %{_builddir}/%{name}-%{version}/tools
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
 # adapt perl files in bindings
 cd %{_builddir}/%{name}-%{version}/bindings
 /usr/bin/tar xpzf %{SOURCE5}
-
 
 %build
 cd %{name}-%{version}
@@ -183,12 +178,7 @@ make stestlib %{?_smp_mflags} ADDFLAGS="%{optflags}"
 ln -s libcl.so.3.4.3 libcl.so
 cd bindings
 python2 setup.py build
-
-# DL_EXPORT is missing in Python.h, so the following build fails.
-# We need to disable the python3 subpackage until this problem is resolved.
-%if %{with_python3}
-     python3 setup.py build
-%endif
+python3 setup.py build
 
 # build javadoc
 mkdir javadoc
@@ -234,7 +224,8 @@ mkdir -p %{buildroot}%{python2_sitelib}
 cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python2_version}/cryptlib_py.so %{buildroot}%{python2_sitelib}
 
 # install python3 module
-# add python3 installation code, when setup.py works in python3
+mkdir -p %{buildroot}%{python3_sitelib}
+cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python3_version}/cryptlib_py.cpython-3*-x86_64-linux-gnu.so %{buildroot}%{python3_sitelib}/cryptlib_py.so
 
 # install Perl module
 mkdir -p %{buildroot}/usr/local/lib64
@@ -313,10 +304,8 @@ tar xpzf %{SOURCE4}
 %files python2
 %{python2_sitelib}/cryptlib_py.so
 
-# at the moment the python3 subpackage cannot be build
-%if %{with_python3}
-    %files python3
-%endif
+%files python3
+%{python3_sitelib}/cryptlib_py.so
 
 %files perl
 %{_libdir}/perl5
@@ -327,6 +316,11 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Wed Aug 02 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-5
+- include ppc64/ppc64le and building the python3 module
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.3.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
 * Wed Jul 05 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-3
 - include aarch64 and exclude ppc64 
