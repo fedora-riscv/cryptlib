@@ -318,7 +318,7 @@ tar xpzf %{SOURCE4}
 %changelog
 
 * Wed Aug 02 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-5
-- include ppc64/ppc64le and building the python3 module
+- include ppc64/ppc64le and introducing the new python3 module
 
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.3.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
