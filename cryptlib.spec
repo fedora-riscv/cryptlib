@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.3.1  
-Release:    5%{?dist}
+Release:    6%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -317,7 +317,7 @@ tar xpzf %{SOURCE4}
 
 %changelog
 
-* Wed Aug 02 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-5
+* Wed Aug 02 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-6
 - include ppc64/ppc64le and introducing the new python3 module
 
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.3.1-4
