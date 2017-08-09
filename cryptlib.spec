@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.3.1  
-Release:    6%{?dist}
+Release:    7%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -20,12 +20,11 @@ Source3:    https://crypto-bone.com/fedora/README-manual
 Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
 Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 Source6:    https://crypto-bone.com/fedora/cryptlibConverter.py
+Source7:    https://crypto-bone.com/fedora/updates-from-beta.tar
 
 # soname is now libcl.so.3.4
 Patch1:     ccflagspatch
 Patch2:     javapatch
-Patch3:     nativepatch
-Patch4:     bignumpatch
 
 
 ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
@@ -146,12 +145,14 @@ rm -rf %{name}-%{version}
 mkdir %{name}-%{version}
 cd %{name}-%{version}
 /usr/bin/unzip -a %{SOURCE0}
+
+# use updates from current beta
+tar xvpf %{SOURCE7}
+
 # use the re-written python.c to support python3
 cp %{SOURCE6} %{_builddir}/%{name}-%{version}/tools
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -316,6 +317,8 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Wed Aug 09 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-7
+- update configuration code for powerpc64
 
 * Wed Aug 02 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-6
 - include ppc64/ppc64le and introducing the new python3 module
