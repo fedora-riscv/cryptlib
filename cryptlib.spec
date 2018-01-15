@@ -3,15 +3,15 @@
 %global cryptlibdir %{_libdir}/%{name}
 
 Name:       cryptlib
-Version:    3.4.3.1  
-Release:    7%{?dist}
+Version:    3.4.4  
+Release:    1%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
 License:    Sleepycat and OpenSSL     
 URL:        https://www.cs.auckland.ac.nz/~pgut001/cryptlib      
-Source0:    https://crypto-bone.com/fedora/cl3431_fedora.zip      
-Source1:    https://crypto-bone.com/fedora/cl3431_fedora.zip.sig
+Source0:    https://crypto-bone.com/fedora/cl344_fedora.zip      
+Source1:    https://crypto-bone.com/fedora/cl344_fedora.zip.sig
 # for security reasons a public signing key should always be stored in distgit
 # and never be used with a URL to make impersonation attacks harder
 # (verified: https://senderek.ie/keys/codesigningkey)
@@ -19,8 +19,6 @@ Source2:    gpgkey-3274CB29956498038A9C874BFBF6E2C28E9C98DD.asc
 Source3:    https://crypto-bone.com/fedora/README-manual
 Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
 Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
-Source6:    https://crypto-bone.com/fedora/cryptlibConverter.py
-Source7:    https://crypto-bone.com/fedora/updates-from-beta.tar
 
 # soname is now libcl.so.3.4
 Patch1:     ccflagspatch
@@ -146,11 +144,6 @@ mkdir %{name}-%{version}
 cd %{name}-%{version}
 /usr/bin/unzip -a %{SOURCE0}
 
-# use updates from current beta
-tar xvpf %{SOURCE7}
-
-# use the re-written python.c to support python3
-cp %{SOURCE6} %{_builddir}/%{name}-%{version}/tools
 %patch1 -p1
 %patch2 -p1
 
@@ -173,10 +166,11 @@ cp /etc/alternatives/java_sdk/include/linux/jni_md.h .
 
 make clean
 make shared %{?_smp_mflags} ADDFLAGS="%{optflags}"
+ln -s libcl.so.3.4.4 libcl.so
+ln -s libcl.so libcl.so.3.4
 make stestlib %{?_smp_mflags} ADDFLAGS="%{optflags}"
 
 # build python modules
-ln -s libcl.so.3.4.3 libcl.so
 cd bindings
 python2 setup.py build
 python3 setup.py build
@@ -192,9 +186,9 @@ javadoc cryptlib
 mkdir -p %{buildroot}%{_libdir}
 mkdir -p %{buildroot}%{_datadir}/licenses/%{name}
 mkdir -p %{buildroot}%{_docdir}/%{name}
-cp %{_builddir}/%{name}-%{version}/libcl.so.3.4.3 %{buildroot}%{_libdir}
+cp %{_builddir}/%{name}-%{version}/libcl.so.3.4.4 %{buildroot}%{_libdir}
 cd %{buildroot}%{_libdir}
-ln -s libcl.so.3.4.3 libcl.so.3.4
+ln -s libcl.so.3.4.4 libcl.so.3.4
 ln -s libcl.so.3.4 libcl.so
 
 # install header files
@@ -253,10 +247,7 @@ cp -r %{_builddir}/%{name}-%{version}/test %{buildroot}%{cryptlibdir}/test
 # remove all c code from the test directory
 rm -rf $(find %{buildroot}%{cryptlibdir}/test -name "*.c")
 
-## remove all header files from the test directory
-# these header files are needed by the test program stestlib to find test files!
-#rm -rf $(find %%{buildroot}%%{cryptlibdir}/test -name "*.h")
-
+# extract test files
 cd %{buildroot}%{cryptlibdir}
 tar xpzf %{SOURCE4} 
 
@@ -265,7 +256,7 @@ tar xpzf %{SOURCE4}
 # in KOJI tests must be disabled as there is no networking
 %if %{includetests}
      cd %{_builddir}/%{name}-%{version}
-     ln -s libcl.so.3.4.3 ./libcl.so.3.4
+     ln -s libcl.so.3.4.4 ./libcl.so.3.4
      export LD_LIBRARY_PATH=.
      echo "Running tests on the cryptlib library. This will take a few minutes."
      echo "Network access is necessary to complete all tests!"
@@ -280,7 +271,7 @@ tar xpzf %{SOURCE4}
 
 
 %files
-%{_libdir}/libcl.so.3.4.3
+%{_libdir}/libcl.so.3.4.4
 %{_libdir}/libcl.so.3.4
 %{_libdir}/libcl.so
 
@@ -317,6 +308,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Mon Jan 15 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-1
+- Update to version 3.4.4
+
 * Wed Aug 09 2017 Senderek Web Security <innovation@senderek.ie> - 3.4.3.1-7
 - update configuration code for powerpc64
 
