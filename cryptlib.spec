@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -31,7 +31,7 @@ BuildRequires: gcc
 BuildRequires: libbsd-devel   
 BuildRequires: gnupg2
 BuildRequires: coreutils
-BuildRequires: python >= 2.7
+BuildRequires: python2 >= 2.7
 BuildRequires: python2-devel >= 2.7
 BuildRequires: python3-devel
 BuildRequires: java-devel
@@ -308,6 +308,10 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri Apr 20 2018 Iryna Shcherbina <shcherbina.iryna@gmail.com> - 3.4.4-3
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
