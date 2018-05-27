@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
