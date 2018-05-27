@@ -288,7 +288,7 @@ tar xpzf %{SOURCE4}
 %{_includedir}/%{name}/cryptlib.h
 
 %files java
-%{_jnidir}/cryptlib.jar
+/usr/lib/java/cryptlib.jar
 
 %files javadoc
 %{_javadocdir}/%{name}
@@ -308,6 +308,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Sun May 27 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-4
+  Fix Java jar path
+
 * Fri Apr 20 2018 Iryna Shcherbina <shcherbina.iryna@gmail.com> - 3.4.4-3
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
