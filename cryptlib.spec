@@ -199,8 +199,10 @@ cp %{_builddir}/%{name}-%{version}/cryptlib.h %{buildroot}%{_includedir}/%{name}
 
 # add Java bindings
 mkdir -p %{buildroot}/%{cryptlibdir}/java
-mkdir -p %{buildroot}/%{_jnidir}
-cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}%{_jnidir}
+#mkdir -p %{buildroot}/%{_jnidir}
+mkdir -p %{buildroot}/usr/lib/java
+#cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}%{_jnidir}
+cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}/usr/lib/java
 
 # install docs
 cp %{_builddir}/%{name}-%{version}/COPYING %{buildroot}%{_datadir}/licenses/%{name}
