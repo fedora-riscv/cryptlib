@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -310,6 +310,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 3.4.4-5
+- Rebuilt for Python 3.7
+
 * Sun May 27 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-4
   Fix Java jar path
 
