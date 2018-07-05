@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    7%{?dist}
+Release:    8%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -23,7 +23,6 @@ Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 # soname is now libcl.so.3.4
 Patch1:     ccflagspatch
 Patch2:     javapatch
-
 
 ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
 
@@ -156,7 +155,12 @@ cd %{_builddir}/%{name}-%{version}/bindings
 %build
 cd %{name}-%{version}
 chmod +x tools/mkhdr.sh
+
+# make sure python2 is used to build in mkhdr.sh
+sed -i '18,20s/^python/python2/' tools/mkhdr.sh
+
 tools/mkhdr.sh
+
 # rename cryptlib symbols that may collide with openssl symbols
 chmod +x tools/rename.sh
 tools/rename.sh
@@ -310,6 +314,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Wed Jul 04 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-8
+  Force use of python2 in mkhdr.sh
+
 * Tue Jul 03 2018 Petr Pisar <ppisar@redhat.com> - 3.4.4-7
 - Perl 5.28 rebuild
 
