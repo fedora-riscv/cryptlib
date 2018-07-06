@@ -4,7 +4,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    8%{?dist}
+Release:    9%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -314,6 +314,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri Jul 06 2018 Petr Pisar <ppisar@redhat.com> - 3.4.4-9
+- Perl 5.28 rebuild
+
 * Wed Jul 04 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-8
   Force use of python2 in mkhdr.sh
 
