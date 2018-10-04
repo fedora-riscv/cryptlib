@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    9%{?dist}
+Release:    11%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -37,9 +37,7 @@ BuildRequires: python3-devel
 BuildRequires: java-devel
 BuildRequires: perl-interpreter
 BuildRequires: perl-devel
-%if 0%{?fedora} >= 23
 BuildRequires: perl-generators
-%endif
 BuildRequires: perl-Data-Dumper
 BuildRequires: perl-ExtUtils-MakeMaker
 
@@ -320,8 +318,14 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
-* Wed Oct 03 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-9
+* Wed Oct 03 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-11
   Remove python2 module (RHBZ #1634602)
+
+* Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.4-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Fri Jul 06 2018 Petr Pisar <ppisar@redhat.com> - 3.4.4-9
+- Perl 5.28 rebuild
 
 * Wed Jul 04 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-8
   Force use of python2 in mkhdr.sh
