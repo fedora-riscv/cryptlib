@@ -31,8 +31,6 @@ BuildRequires: gcc
 BuildRequires: libbsd-devel   
 BuildRequires: gnupg2
 BuildRequires: coreutils
-BuildRequires: python2 >= 2.7
-BuildRequires: python2-devel >= 2.7
 BuildRequires: python3-devel
 BuildRequires: java-devel
 BuildRequires: perl-interpreter
@@ -40,6 +38,13 @@ BuildRequires: perl-devel
 BuildRequires: perl-generators
 BuildRequires: perl-Data-Dumper
 BuildRequires: perl-ExtUtils-MakeMaker
+
+# For tools/cryptlibConverter.py
+BuildRequires: python2 >= 2.7
+
+%if %{withpython2}
+    BuildRequires: python2-devel >= 2.7
+%endif
 
 
 # beignet provides a library libcl.so for OpenCL
