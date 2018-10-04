@@ -1,10 +1,11 @@
 %global includetests 0
 # 0=no, 1=yes
 %global cryptlibdir %{_libdir}/%{name}
+%global withpython2 0
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    8%{?dist}
+Release:    9%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
@@ -99,16 +100,15 @@ Buildarch : noarch
 %description javadoc
 Cryptlib Javadoc information
 
-
-%package python2
-Summary:  Cryptlib bindings for python2
-Group:    System Environment/Libraries
-Requires: %{name}%{?_isa} = %{version}-%{release}
-Requires: python2 >= 2.7
-
-%description python2
-Cryptlib module for application development in Python 2
-
+%if %{withpython2}
+    %package python2
+    Summary:  Cryptlib bindings for python2
+    Group:    System Environment/Libraries
+    Requires: %{name}%{?_isa} = %{version}-%{release}
+    Requires: python2 >= 2.7
+    %description python2
+    Cryptlib module for application development in Python 2
+%endif
 
 %package python3
 Summary:  Cryptlib bindings for python3
@@ -176,7 +176,9 @@ make stestlib %{?_smp_mflags} ADDFLAGS="%{optflags}"
 
 # build python modules
 cd bindings
-python2 setup.py build
+%if %{withpython2}
+     python2 setup.py build
+%endif
 python3 setup.py build
 
 # build javadoc
@@ -220,9 +222,11 @@ mkdir -p %{buildroot}%{_javadocdir}/%{name}
 rm -rf %{_builddir}/%{name}-%{version}/bindings/javadoc/META-INF
 cp -r %{_builddir}/%{name}-%{version}/bindings/javadoc/* %{buildroot}%{_javadocdir}/%{name}
 
-# install python2 module
-mkdir -p %{buildroot}%{python2_sitelib}
-cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python2_version}/cryptlib_py.so %{buildroot}%{python2_sitelib}
+%if %{withpython2}
+     # install python2 module
+     mkdir -p %{buildroot}%{python2_sitelib}
+     cp %{_builddir}/%{name}-%{version}/bindings/build/lib.linux-*%{python2_version}/cryptlib_py.so %{buildroot}%{python2_sitelib}
+%endif
 
 # install python3 module
 mkdir -p %{buildroot}%{python3_sitelib}
@@ -299,8 +303,10 @@ tar xpzf %{SOURCE4}
 %files javadoc
 %{_javadocdir}/%{name}
 
-%files python2
-%{python2_sitelib}/cryptlib_py.so
+%if %{withpython2}
+     %files python2
+     %{python2_sitelib}/cryptlib_py.so
+%endif
 
 %files python3
 %{python3_sitelib}/cryptlib_py.so
@@ -314,6 +320,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Wed Oct 03 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-9
+  Remove python2 module (RHBZ #1634602)
+
 * Wed Jul 04 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-8
   Force use of python2 in mkhdr.sh
 
