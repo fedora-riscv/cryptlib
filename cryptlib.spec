@@ -278,9 +278,7 @@ tar xpzf %{SOURCE4}
 %endif
 
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files
