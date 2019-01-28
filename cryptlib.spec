@@ -8,7 +8,6 @@ Version:    3.4.4
 Release:    11%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
-Group:      System Environment/Libraries         
 License:    Sleepycat and OpenSSL     
 URL:        https://www.cs.auckland.ac.nz/~pgut001/cryptlib      
 Source0:    https://crypto-bone.com/fedora/cl344_fedora.zip      
@@ -115,7 +114,6 @@ Cryptlib Javadoc information
 
 %package python3
 Summary:  Cryptlib bindings for python3
-Group:    System Environment/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: python3 >= 3.5  
 
@@ -124,7 +122,6 @@ Cryptlib module for application development in Python 3
 
 %package perl
 Summary:  Cryptlib bindings for perl
-Group:    System Environment/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: man
 
