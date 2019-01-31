@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.4  
-Release:    11%{?dist}
+Release:    12%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -318,6 +318,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.4-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Wed Oct 03 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-11
   Remove python2 module (RHBZ #1634602)
 
