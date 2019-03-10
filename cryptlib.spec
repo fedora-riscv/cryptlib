@@ -82,7 +82,7 @@ Summary:  Cryptlib test program
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description test
-Cryptlib test programs for C, Java, Perl and Python
+Cryptlib test programs for C, Java, Perl and Python3
 
 
 %package java
@@ -117,7 +117,7 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: python3 >= 3.5  
 
 %description python3
-Cryptlib module for application development in Python 3
+Cryptlib module for application development in Python3
 
 %package perl
 Summary:  Cryptlib bindings for perl
