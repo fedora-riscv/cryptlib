@@ -4,15 +4,15 @@
 %global withpython2 0
 
 Name:       cryptlib
-Version:    3.4.4  
-Release:    11%{?dist}
+Version:    3.4.5  
+Release:    1%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 Group:      System Environment/Libraries         
 License:    Sleepycat and OpenSSL     
 URL:        https://www.cs.auckland.ac.nz/~pgut001/cryptlib      
-Source0:    https://crypto-bone.com/fedora/cl344_fedora.zip      
-Source1:    https://crypto-bone.com/fedora/cl344_fedora.zip.sig
+Source0:    https://crypto-bone.com/fedora/cl345_fedora.zip      
+Source1:    https://crypto-bone.com/fedora/cl345_fedora.zip.sig
 # for security reasons a public signing key should always be stored in distgit
 # and never be used with a URL to make impersonation attacks harder
 # (verified: https://senderek.ie/keys/codesigningkey)
@@ -24,6 +24,7 @@ Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 # soname is now libcl.so.3.4
 Patch1:     ccflagspatch
 Patch2:     javapatch
+Patch3:     perlpatch
 
 ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
 
@@ -39,8 +40,6 @@ BuildRequires: perl-generators
 BuildRequires: perl-Data-Dumper
 BuildRequires: perl-ExtUtils-MakeMaker
 
-# For tools/cryptlibConverter.py
-BuildRequires: python2 >= 2.7
 
 %if %{withpython2}
     BuildRequires: python2-devel >= 2.7
@@ -148,6 +147,7 @@ cd %{name}-%{version}
 
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -158,9 +158,6 @@ cd %{_builddir}/%{name}-%{version}/bindings
 %build
 cd %{name}-%{version}
 chmod +x tools/mkhdr.sh
-
-# make sure python2 is used to build in mkhdr.sh
-sed -i '18,20s/^python/python2/' tools/mkhdr.sh
 
 tools/mkhdr.sh
 
@@ -173,7 +170,7 @@ cp /etc/alternatives/java_sdk/include/linux/jni_md.h .
 
 make clean
 make shared %{?_smp_mflags} ADDFLAGS="%{optflags}"
-ln -s libcl.so.3.4.4 libcl.so
+ln -s libcl.so.3.4.5 libcl.so
 ln -s libcl.so libcl.so.3.4
 make stestlib %{?_smp_mflags} ADDFLAGS="%{optflags}"
 
@@ -195,9 +192,9 @@ javadoc cryptlib
 mkdir -p %{buildroot}%{_libdir}
 mkdir -p %{buildroot}%{_datadir}/licenses/%{name}
 mkdir -p %{buildroot}%{_docdir}/%{name}
-cp %{_builddir}/%{name}-%{version}/libcl.so.3.4.4 %{buildroot}%{_libdir}
+cp %{_builddir}/%{name}-%{version}/libcl.so.3.4.5 %{buildroot}%{_libdir}
 cd %{buildroot}%{_libdir}
-ln -s libcl.so.3.4.4 libcl.so.3.4
+ln -s libcl.so.3.4.5 libcl.so.3.4
 ln -s libcl.so.3.4 libcl.so
 
 # install header files
@@ -208,9 +205,7 @@ cp %{_builddir}/%{name}-%{version}/cryptlib.h %{buildroot}%{_includedir}/%{name}
 
 # add Java bindings
 mkdir -p %{buildroot}/%{cryptlibdir}/java
-#mkdir -p %{buildroot}/%{_jnidir}
 mkdir -p %{buildroot}/usr/lib/java
-#cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}%{_jnidir}
 cp %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar %{buildroot}/usr/lib/java
 
 # install docs
@@ -269,7 +264,7 @@ tar xpzf %{SOURCE4}
 # in KOJI tests must be disabled as there is no networking
 %if %{includetests}
      cd %{_builddir}/%{name}-%{version}
-     ln -s libcl.so.3.4.4 ./libcl.so.3.4
+     ln -s libcl.so.3.4.5 ./libcl.so.3.4
      export LD_LIBRARY_PATH=.
      echo "Running tests on the cryptlib library. This will take a few minutes."
      echo "Network access is necessary to complete all tests!"
@@ -284,7 +279,7 @@ tar xpzf %{SOURCE4}
 
 
 %files
-%{_libdir}/libcl.so.3.4.4
+%{_libdir}/libcl.so.3.4.5
 %{_libdir}/libcl.so.3.4
 %{_libdir}/libcl.so
 
@@ -323,6 +318,12 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Sun Mar 10 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-1
+  Update to version 3.4.5 and porting to python3 only
+
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.4-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Wed Oct 03 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-11
   Remove python2 module (RHBZ #1634602)
 
