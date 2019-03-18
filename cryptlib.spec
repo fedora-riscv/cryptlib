@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -44,9 +44,6 @@ BuildRequires: perl-ExtUtils-MakeMaker
     BuildRequires: python2-devel >= 2.7
 %endif
 
-
-# beignet provides a library libcl.so for OpenCL
-Conflicts: beignet
 
 %description
 Cryptlib is a powerful security toolkit that allows even inexperienced crypto
@@ -313,14 +310,17 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Mon Mar 18 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-2
+- Removing obsolete conflict with beignet
+
 * Sun Mar 10 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-1
-  Update to version 3.4.5 and porting to python3 only
+- Update to version 3.4.5 and porting to python3 only
 
 * Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.4-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
 * Wed Oct 03 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-11
-  Remove python2 module (RHBZ #1634602)
+- Remove python2 module (RHBZ #1634602)
 
 * Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.4-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
@@ -329,7 +329,7 @@ tar xpzf %{SOURCE4}
 - Perl 5.28 rebuild
 
 * Wed Jul 04 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-8
-  Force use of python2 in mkhdr.sh
+- Force use of python2 in mkhdr.sh
 
 * Tue Jul 03 2018 Petr Pisar <ppisar@redhat.com> - 3.4.4-7
 - Perl 5.28 rebuild
@@ -341,7 +341,7 @@ tar xpzf %{SOURCE4}
 - Rebuilt for Python 3.7
 
 * Sun May 27 2018 Ralf Senderek <innovation@senderek.ie> - 3.4.4-4
-  Fix Java jar path
+- Fix Java jar path
 
 * Fri Apr 20 2018 Iryna Shcherbina <shcherbina.iryna@gmail.com> - 3.4.4-3
 - Update Python 2 dependency declarations to new packaging standards
