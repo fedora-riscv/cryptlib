@@ -233,15 +233,13 @@ mkdir -p %{_builddir}/include
 cp ../cryptlib.h %{_builddir}/include
 cp ../tools/GenPerl.pl .
 export PERL_CRYPT_LIB_HEADER=%{_builddir}/include/cryptlib.h
-/usr/bin/perl Makefile.PL
+/usr/bin/perl Makefile.PL INSTALLDIRS=vendor
 sed -i '/LDLOADLIBS = /s/thread/thread -L.. -lcl/' Makefile
 make
 make pure_install DESTDIR=%{buildroot}
 # clean the install
-rm $(find %{buildroot}/usr/local/lib*/perl5 -name ".packlist")
-chmod 0755 %{buildroot}/usr/local/lib*/perl5/auto/PerlCryptLib/PerlCryptLib.so
-mv %{buildroot}/usr/local/lib*/perl5/* %{buildroot}%{_libdir}/perl5
-mv %{buildroot}/usr/local/share/man/man3/* %{buildroot}%{_mandir}/man3
+find %{buildroot} -type f -name .packlist -delete
+find %{buildroot} -type f -name 'PerlCryptLib.so' -exec chmod 0755 {} \;
 
 # install test programs
 cp %{_builddir}/%{name}-%{version}/stestlib %{buildroot}%{cryptlibdir}
