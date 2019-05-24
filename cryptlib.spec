@@ -308,6 +308,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri May 24 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-3
+- Update Perl installation paths
+
 * Mon Mar 18 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-2
 - Removing obsolete conflict with beignet
 
