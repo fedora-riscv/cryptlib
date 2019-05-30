@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -308,6 +308,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Thu May 30 2019 Jitka Plesnikova <jplesnik@redhat.com> - 3.4.5-4
+- Perl 5.30 rebuild
+
 * Fri May 24 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-3
 - Update Perl installation paths
 
