@@ -310,7 +310,6 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
-<<<<<<< HEAD
 * Sat Nov 23 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-7
 - Enable gcc versions > 9
 
