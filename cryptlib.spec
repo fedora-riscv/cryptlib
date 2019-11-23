@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -24,6 +24,7 @@ Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 Patch1:     ccflagspatch
 Patch2:     javapatch
 Patch3:     perlpatch
+Patch4:     gccversionpatch
 
 ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
 
@@ -142,6 +143,7 @@ cd %{name}-%{version}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -308,6 +310,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Sat Nov 23 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-4
+- Enable gcc versions > 9
+
 * Fri May 24 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-3
 - Update Perl installation paths
 
