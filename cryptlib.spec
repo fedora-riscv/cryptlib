@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    7%{?dist}
+Release:    8%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -310,6 +310,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Wed Jan 22 2020 Ralf Senderek <innovation@senderek.ie> - 3.4.5-8
+- gcc-10: remove deprecated flag -mcpu (RHBZ #1793394)
+
 * Sat Nov 23 2019 Ralf Senderek <innovation@senderek.ie> - 3.4.5-7
 - Enable gcc versions > 9
 

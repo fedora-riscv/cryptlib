@@ -1,5 +1,5 @@
 --- cl-original/tools/ccopts.sh	2019-11-23 17:03:39.315504598 +0100
-+++ cl-patched/tools/ccopts.sh	2019-11-23 17:05:59.813581907 +0100
++++ cl-testpatch/tools/ccopts.sh	2020-01-22 18:49:01.093189548 +0100
 @@ -508,10 +508,17 @@
  # apparent version less than 10 we add a trailing zero to the string to make
  # the checks that follow work.
@@ -22,3 +22,12 @@
  
  # Try and determine the CPU type.  This is made more complex by a pile of
  # *BSE's which, along with antideluvian tools like an as that doesn't
+@@ -606,7 +613,7 @@
+ 				CCARGS="$CCARGS -march=pentium" ;;
+ 		esac ;
+ 	else
+-		CCARGS="$CCARGS -mcpu=pentium" ;
++		CCARGS="$CCARGS -march=native" ;
+ 	fi ;
+ fi
+ 
