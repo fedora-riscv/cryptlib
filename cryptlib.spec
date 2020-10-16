@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    13%{?dist}
+Release:    14%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -310,6 +310,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri Oct 16 2020 Ralf Senderek <innovation@senderek.ie> - 3.4.5-14
+- Fix Python Upstream Architecture Names for powerpc architecture 
+
 * Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.5-13
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
