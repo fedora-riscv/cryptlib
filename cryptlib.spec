@@ -39,6 +39,7 @@ BuildRequires: perl-devel
 BuildRequires: perl-generators
 BuildRequires: perl-Data-Dumper
 BuildRequires: perl-ExtUtils-MakeMaker
+BuildRequires: make
 
 
 %if %{withpython2}
