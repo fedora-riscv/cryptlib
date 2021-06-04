@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    16%{?dist}
+Release:    17%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -311,6 +311,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 3.4.5-17
+- Rebuilt for Python 3.10
+
 * Fri May 21 2021 Jitka Plesnikova <jplesnik@redhat.com> - 3.4.5-16
 - Perl 5.34 rebuild
 
