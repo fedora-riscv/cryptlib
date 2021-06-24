@@ -25,7 +25,7 @@ Patch1:     ccflagspatch
 Patch2:     javapatch
 Patch3:     perlpatch
 Patch4:     gccversionpatch
-Patch4:     threadpatch
+Patch5:     threadpatch
 
 ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
 
