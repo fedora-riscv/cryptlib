@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    17%{?dist}
+Release:    18%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -25,6 +25,7 @@ Patch1:     ccflagspatch
 Patch2:     javapatch
 Patch3:     perlpatch
 Patch4:     gccversionpatch
+Patch4:     threadpatch
 
 ExclusiveArch: x86_64 %{ix86} aarch64 ppc64 ppc64le
 
@@ -145,6 +146,7 @@ cd %{name}-%{version}
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -311,6 +313,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Thu Jun 24 2021 Ralf Senderek <innovation@senderek.ie> - 3.4.5-18
+- Fix pthread issue (RHBZ #1974247) 
+
 * Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 3.4.5-17
 - Rebuilt for Python 3.10
 
