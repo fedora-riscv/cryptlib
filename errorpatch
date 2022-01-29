@@ -1,0 +1,22 @@
+--- cl-original/session/sess_rd.c	2021-12-04 13:22:11.285916236 +0100
++++ cl-patched/session/sess_rd.c	2021-12-04 13:20:20.782210067 +0100
+@@ -1020,7 +1020,7 @@
+ 						  &sessionInfoPtr->errorInfo );
+ 		retExtErr( status,
+ 				   ( status, SESSION_ERRINFO, SESSION_ERRINFO,
+-				     errorMessage ) );
++				     "High-Level Error %s : ", errorMessage ) );
+ 		}
+ 	length = httpDataInfo.bytesAvail;
+ 
+--- cl-original/session/sess_wr.c	2021-12-04 13:22:16.714901800 +0100
++++ cl-patched/session/sess_wr.c	2021-12-04 13:20:40.481157684 +0100
+@@ -600,7 +600,7 @@
+ 						  &sessionInfoPtr->errorInfo );
+ 		retExtErr( status,
+ 				   ( status, SESSION_ERRINFO, SESSION_ERRINFO,
+-				     errorMessage ) );
++				     "High-Level Error %s : ", errorMessage ) );
+ 		}
+ 	sessionInfoPtr->receiveBufEnd = 0;
+ 
