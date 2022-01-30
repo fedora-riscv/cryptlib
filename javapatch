@@ -1,0 +1,11 @@
+--- cl-original/misc/config.h	2021-12-03 16:43:09.959891808 +0100
++++ cl-patched/misc/config.h	2021-12-03 16:44:07.248896490 +0100
+@@ -218,7 +218,7 @@
+ 
+ /* Whether to build the Java/JNI interface or not */
+ 
+-/* #define USE_JAVA */
++#define USE_JAVA
+ 
+ /* Whether to provide descriptive text messages for errors or not.
+    Disabling these can reduce code size, at the expense of making error
