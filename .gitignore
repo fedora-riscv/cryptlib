@@ -1,13 +1,5 @@
 /nativepatch
 /perlpatch
 /gccversionpatch
-/cl346_fedora.zip
-/cl346_fedora.zip.sig
-/ccflagspatch
-/javapatch
-/errorpatch
-/cryptlib.spec
-/cryptlib-tests.tar.gz
-/selftest.c
 /3.4.5
 /3.4.6
