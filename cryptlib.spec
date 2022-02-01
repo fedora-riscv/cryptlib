@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -21,7 +21,7 @@ Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
 Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 
 # soname is now libcl.so.3.4
-Patch1:     ccflagspatch
+Patch1:     flagspatch
 Patch2:     javapatch
 Patch3:     errorpatch
 
@@ -309,6 +309,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Thu Feb 01 2022 Ralf Senderek <innovation@senderek.ie>  - 3.4.6-2
+- 3.4.6 with flagspatch
+
 * Sun Jan 30 2022 Ralf Senderek <innovation@senderek.ie>  - 3.4.6-1
 - update SCM to version 3.4.6, new test-files
 
