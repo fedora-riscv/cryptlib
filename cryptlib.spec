@@ -312,7 +312,7 @@ tar xpzf %{SOURCE4}
 * Sat Feb 05 2022 Jiri Vanek <jvanek@redhat.com> - 3.4.6-3
 - Rebuilt for java-17-openjdk as system jdk
 
-* Thu Feb 01 2022 Ralf Senderek <innovation@senderek.ie>  - 3.4.6-2
+* Tue Feb 01 2022 Ralf Senderek <innovation@senderek.ie>  - 3.4.6-2
 - 3.4.6 with flagspatch
 
 * Sun Jan 30 2022 Ralf Senderek <innovation@senderek.ie>  - 3.4.6-1
