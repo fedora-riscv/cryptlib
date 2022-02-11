@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.5  
-Release:    21%{?dist}
+Release:    22%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -313,6 +313,9 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-22
+- Update patches for version 3.4.5
+
 * Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-21
 - Rebuilt for java-17-openjdk as system jdk
 
