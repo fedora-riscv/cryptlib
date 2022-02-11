@@ -1,6 +1,6 @@
---- cl-original/misc/config.h	2021-12-03 16:43:09.959891808 +0100
-+++ cl-patched/misc/config.h	2021-12-03 16:44:07.248896490 +0100
-@@ -218,7 +218,7 @@
+--- cl-original/misc/config.h	2019-03-10 11:50:06.827085487 +0100
++++ cl-patched/misc/config.h	2019-03-10 11:51:27.444688279 +0100
+@@ -163,7 +163,7 @@
  
  /* Whether to build the Java/JNI interface or not */
  
