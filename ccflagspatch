@@ -1,11 +1,11 @@
---- cl-original/makefile	2021-12-03 15:53:24.172492715 +0100
-+++ cl-patched/makefile	2021-12-03 15:54:55.914497971 +0100
-@@ -92,7 +92,7 @@
- #
- # Standard build flags
+--- cl-original/makefile	2019-03-10 11:50:35.325298573 +0100
++++ cl-patched/makefile	2019-03-10 11:53:03.663407724 +0100
+@@ -90,7 +90,7 @@
+ # Further cc flags are gathered dynamically at runtime via the ccopts.sh
+ # script.
  
 -CFLAGS			= -c -D__UNIX__ -DNDEBUG -I.
 +CFLAGS			= -c -D__UNIX__ -DNDEBUG -I. $(ADDFLAGS)
  CFLAGS_DEBUG	= -c -D__UNIX__ -I. -g -O1
  CFLAGS_DEBUGGCC	= -c -D__UNIX__ -I. -ggdb3 -fno-omit-frame-pointer -O1
- 
+ CFLAGS_ANALYSE	= -c -D__UNIX__ -I.
