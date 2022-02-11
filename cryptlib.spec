@@ -313,7 +313,7 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
-* Fri Feb 11 2022 Ralf Senderek <>innovation@senderek.ie - 3.4.5-21
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-21
 - Rebuilt for java-17-openjdk as system jdk
 
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.5-20
