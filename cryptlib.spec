@@ -312,6 +312,12 @@ tar xpzf %{SOURCE4}
 * Thu Feb 17 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-4
 - Drop i686
 
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-22
+- Update patches for version 3.4.5
+	
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-21
+- Rebuilt for java-17-openjdk as system jdk
+
 * Sat Feb 05 2022 Jiri Vanek <jvanek@redhat.com> - 3.4.6-3
 - Rebuilt for java-17-openjdk as system jdk
 
