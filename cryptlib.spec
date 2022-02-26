@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -24,6 +24,7 @@ Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
 Patch1:     flagspatch
 Patch2:     javapatch
 Patch3:     errorpatch
+Patch4:     testpatch
 
 ExclusiveArch: x86_64 aarch64 ppc64 ppc64le
 
@@ -143,6 +144,7 @@ cd %{name}-%{version}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -309,8 +311,17 @@ tar xpzf %{SOURCE4}
 
 
 %changelog
+* Sat Feb 26 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-5
+- Correct date in test/cert.c
+
 * Thu Feb 17 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-4
 - Drop i686
+
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-22
+- Update patches for version 3.4.5
+	
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-21
+- Rebuilt for java-17-openjdk as system jdk
 
 * Sat Feb 05 2022 Jiri Vanek <jvanek@redhat.com> - 3.4.6-3
 - Rebuilt for java-17-openjdk as system jdk
