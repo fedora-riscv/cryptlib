@@ -1,0 +1,14 @@
+--- cl-original/test/certs.c	2022-02-25 19:58:23.896919893 +0100
++++ cl-patched/test/certs.c	2022-02-25 19:59:14.352826858 +0100
+@@ -50,9 +50,9 @@
+ 
+ #define ONE_YEAR_TIME	( 365 * 86400L )
+ #if defined( __MWERKS__ ) || defined( SYMANTEC_C ) || defined( __MRC__ )
+-  #define CERTTIME_DATETEST	( ( ( 2021 - 1970 ) * ONE_YEAR_TIME ) + 2082844800L )
++  #define CERTTIME_DATETEST	( ( ( 2022 - 1970 ) * ONE_YEAR_TIME ) + 2082844800L )
+ #else
+-  #define CERTTIME_DATETEST	( ( 2021 - 1970 ) * ONE_YEAR_TIME )
++  #define CERTTIME_DATETEST	( ( 2022 - 1970 ) * ONE_YEAR_TIME )
+ #endif /* Macintosh-specific weird epoch */
+ #if ( ULONG_MAX > 0xFFFFFFFFUL ) || defined( _M_X64 )
+   #define SYSTEM_64BIT
