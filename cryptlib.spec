@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    6%{?dist}
+Release:    7%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -19,6 +19,7 @@ Source2:    gpgkey-3274CB29956498038A9C874BFBF6E2C28E9C98DD.asc
 Source3:    https://senderek.ie/fedora/README-manual
 Source4:    https://senderek.ie/fedora/cryptlib-tests.tar.gz
 Source5:    https://senderek.ie/fedora/cryptlib-perlfiles.tar.gz
+Source6:    https://senderek.ie/fedora/cryptlib-tools.tar.gz
 
 # soname is now libcl.so.3.4
 Patch1:     flagspatch
@@ -127,6 +128,14 @@ Requires: man
 %description perl
 Cryptlib module for application development in Perl
 
+%package tools
+Summary:  Collection of stand-alone programs that use Cryptlib
+Requires: python3 >= 3.5
+Requires: man
+Requires: %{name}%-python3
+
+%description tools
+Collection of stand-alone programs that use Cryptlib
 
 
 %prep
@@ -256,6 +265,16 @@ rm -rf $(find %{buildroot}%{cryptlibdir}/test -name "*.c")
 cd %{buildroot}%{cryptlibdir}
 tar xpzf %{SOURCE4} 
 
+# install cryptlib tools 
+cd %{buildroot}%{cryptlibdir}
+tar xpzf %{SOURCE6} 
+mkdir -p %{buildroot}%{_mandir}/man1
+mkdir -p %{buildroot}%{_bindir}
+cp /%{buildroot}%{cryptlibdir}/tools/clsha1 %{buildroot}%{_bindir}
+cp /%{buildroot}%{cryptlibdir}/tools/clsha2 %{buildroot}%{_bindir}
+cp /%{buildroot}%{cryptlibdir}/tools/man/clsha1.1 %{buildroot}%{_mandir}/man1
+cp /%{buildroot}%{cryptlibdir}/tools/man/clsha2.1 %{buildroot}%{_mandir}/man1
+
 %check
 # checks are performed after install
 # in KOJI tests must be disabled as there is no networking
@@ -311,8 +330,18 @@ tar xpzf %{SOURCE4}
 %files test
 %{cryptlibdir}
 
+%files tools
+%{_bindir}/clsha1
+%{_bindir}/clsha2
+%{_mandir}/man1/clsha1.1.gz
+%{_mandir}/man1/clsha2.1.gz
+
+
 
 %changelog
+* Sat Mar 05 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-7
+- Add subpackage cryptlib-tools
+
 * Fri Mar 04 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-6
 - Define -march=x86-64
 
