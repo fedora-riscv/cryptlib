@@ -1,31 +1,34 @@
-%global includetests 0
+%global includetests 1
 # 0=no, 1=yes
 %global cryptlibdir %{_libdir}/%{name}
 %global withpython2 0
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    4%{?dist}
+Release:    7%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
 URL:        https://www.cs.auckland.ac.nz/~pgut001/cryptlib      
-Source0:    https://crypto-bone.com/fedora/cl346_fedora.zip      
-Source1:    https://crypto-bone.com/fedora/cl346_fedora.zip.sig
+Source0:    https://senderek.ie/fedora/cl346_fedora.zip      
+Source1:    https://senderek.ie/fedora/cl346_fedora.zip.sig
 # for security reasons a public signing key should always be stored in distgit
 # and never be used with a URL to make impersonation attacks harder
 # (verified: https://senderek.ie/keys/codesigningkey)
 Source2:    gpgkey-3274CB29956498038A9C874BFBF6E2C28E9C98DD.asc
-Source3:    https://crypto-bone.com/fedora/README-manual
-Source4:    https://crypto-bone.com/fedora/cryptlib-tests.tar.gz
-Source5:    https://crypto-bone.com/fedora/cryptlib-perlfiles.tar.gz
+Source3:    https://senderek.ie/fedora/README-manual
+Source4:    https://senderek.ie/fedora/cryptlib-tests.tar.gz
+Source5:    https://senderek.ie/fedora/cryptlib-perlfiles.tar.gz
+Source6:    https://senderek.ie/fedora/cryptlib-tools.tar.gz
 
 # soname is now libcl.so.3.4
 Patch1:     flagspatch
-Patch2:     javapatch
+Patch2:     configpatch
 Patch3:     errorpatch
+Patch4:     testpatch
+Patch5:     x86-64patch
 
-ExclusiveArch: x86_64 aarch64 ppc64 ppc64le
+ExclusiveArch: x86_64 aarch64 ppc64le
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
@@ -125,6 +128,14 @@ Requires: man
 %description perl
 Cryptlib module for application development in Perl
 
+%package tools
+Summary:  Collection of stand-alone programs that use Cryptlib
+Requires: python3 >= 3.5
+Requires: man
+Requires: %{name}%-python3
+
+%description tools
+Collection of stand-alone programs that use Cryptlib
 
 
 %prep
@@ -143,6 +154,8 @@ cd %{name}-%{version}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -164,10 +177,10 @@ cp /etc/alternatives/java_sdk/include/jni.h .
 cp /etc/alternatives/java_sdk/include/linux/jni_md.h .
 
 make clean
-make shared %{?_smp_mflags} ADDFLAGS="%{optflags}"
+make shared  ADDFLAGS="%{optflags}"
 ln -s libcl.so.3.4.6 libcl.so
 ln -s libcl.so libcl.so.3.4
-make stestlib %{?_smp_mflags} ADDFLAGS="%{optflags}"
+make stestlib  ADDFLAGS="%{optflags}"
 
 # build python modules
 cd bindings
@@ -252,17 +265,27 @@ rm -rf $(find %{buildroot}%{cryptlibdir}/test -name "*.c")
 cd %{buildroot}%{cryptlibdir}
 tar xpzf %{SOURCE4} 
 
+# install cryptlib tools 
+cd %{buildroot}%{cryptlibdir}
+tar xpzf %{SOURCE6} 
+mkdir -p %{buildroot}%{_mandir}/man1
+mkdir -p %{buildroot}%{_bindir}
+cp /%{buildroot}%{cryptlibdir}/tools/clsha1 %{buildroot}%{_bindir}
+cp /%{buildroot}%{cryptlibdir}/tools/clsha2 %{buildroot}%{_bindir}
+cp /%{buildroot}%{cryptlibdir}/tools/man/clsha1.1 %{buildroot}%{_mandir}/man1
+cp /%{buildroot}%{cryptlibdir}/tools/man/clsha2.1 %{buildroot}%{_mandir}/man1
+
 %check
 # checks are performed after install
 # in KOJI tests must be disabled as there is no networking
 %if %{includetests}
      cd %{_builddir}/%{name}-%{version}
-     ln -s libcl.so.3.4.6 ./libcl.so.3.4
      export LD_LIBRARY_PATH=.
      echo "Running tests on the cryptlib library. This will take a few minutes."
-     echo "Network access is necessary to complete all tests!"
-     ./stestlib > %{_builddir}/%{name}-%{version}/stestlib.log
-     cp %{_builddir}/%{name}-%{version}/stestlib.log %{buildroot}%{_docdir}/%{name}/stestlib.log
+     cp %{buildroot}%{cryptlibdir}/c/cryptlib-test.c .
+     sed -i '41s/<cryptlib\/cryptlib.h>/\".\/cryptlib.h\"/' cryptlib-test.c
+     gcc  -o cryptlib-test cryptlib-test.c -L. libcl.so.3.4.6
+     ./cryptlib-test
 %endif
 
 
@@ -307,10 +330,32 @@ tar xpzf %{SOURCE4}
 %files test
 %{cryptlibdir}
 
+%files tools
+%{_bindir}/clsha1
+%{_bindir}/clsha2
+%{_mandir}/man1/clsha1.1.gz
+%{_mandir}/man1/clsha2.1.gz
+
+
 
 %changelog
+* Sat Mar 05 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-7
+- Add subpackage cryptlib-tools
+
+* Fri Mar 04 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-6
+- Define -march=x86-64
+
+* Sat Feb 26 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-5
+- Correct date in test/cert.c
+
 * Thu Feb 17 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-4
 - Drop i686
+
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-22
+- Update patches for version 3.4.5
+	
+* Fri Feb 11 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.5-21
+- Rebuilt for java-17-openjdk as system jdk
 
 * Sat Feb 05 2022 Jiri Vanek <jvanek@redhat.com> - 3.4.6-3
 - Rebuilt for java-17-openjdk as system jdk
