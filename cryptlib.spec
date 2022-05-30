@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    7%{?dist}
+Release:    8%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -339,6 +339,9 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/clsha2.1 %{buildroot}%{_mandir}/man1
 
 
 %changelog
+* Mon May 30 2022 Jitka Plesnikova <jplesnik@redhat.com> - 3.4.6-8
+- Perl 5.36 rebuild
+
 * Sat Mar 05 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-7
 - Add subpackage cryptlib-tools
 
