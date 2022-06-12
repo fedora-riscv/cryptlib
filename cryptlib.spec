@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    7%{?dist}
+Release:    8%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -20,6 +20,8 @@ Source3:    https://senderek.ie/fedora/README-manual
 Source4:    https://senderek.ie/fedora/cryptlib-tests.tar.gz
 Source5:    https://senderek.ie/fedora/cryptlib-perlfiles.tar.gz
 Source6:    https://senderek.ie/fedora/cryptlib-tools.tar.gz
+Source7:    https://senderek.ie/fedora/claes
+Source8:    https://senderek.ie/fedora/claes.sig
 
 # soname is now libcl.so.3.4
 Patch1:     flagspatch
@@ -145,6 +147,7 @@ KEYRING=${KEYRING%%.asc}.gpg
 mkdir -p .gnupg
 gpg2 --homedir .gnupg --no-default-keyring --quiet --yes --output $KEYRING --dearmor  %{SOURCE2}
 gpg2 --homedir .gnupg --no-default-keyring --keyring $KEYRING --verify %{SOURCE1} %{SOURCE0}
+gpg2 --homedir .gnupg --no-default-keyring --keyring $KEYRING --verify %{SOURCE8} %{SOURCE7}
 
 rm -rf %{name}-%{version}
 mkdir %{name}-%{version}
@@ -270,10 +273,12 @@ cd %{buildroot}%{cryptlibdir}
 tar xpzf %{SOURCE6} 
 mkdir -p %{buildroot}%{_mandir}/man1
 mkdir -p %{buildroot}%{_bindir}
+cp %{SOURCE7} %{buildroot}%{_bindir}
 cp /%{buildroot}%{cryptlibdir}/tools/clsha1 %{buildroot}%{_bindir}
 cp /%{buildroot}%{cryptlibdir}/tools/clsha2 %{buildroot}%{_bindir}
 cp /%{buildroot}%{cryptlibdir}/tools/man/clsha1.1 %{buildroot}%{_mandir}/man1
 cp /%{buildroot}%{cryptlibdir}/tools/man/clsha2.1 %{buildroot}%{_mandir}/man1
+cp /%{buildroot}%{cryptlibdir}/tools/man/claes.1  %{buildroot}%{_mandir}/man1
 
 %check
 # checks are performed after install
@@ -333,12 +338,17 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/clsha2.1 %{buildroot}%{_mandir}/man1
 %files tools
 %{_bindir}/clsha1
 %{_bindir}/clsha2
-%{_mandir}/man1/clsha1.1.gz
+%{_bindir}/claes
 %{_mandir}/man1/clsha2.1.gz
+%{_mandir}/man1/clsha1.1.gz
+%{_mandir}/man1/claes.1.gz
 
 
 
 %changelog
+* Sun Jun 12 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-8
+- Add claes ver 1.0 to cryptlib-tools
+
 * Sat Mar 05 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-7
 - Add subpackage cryptlib-tools
 
