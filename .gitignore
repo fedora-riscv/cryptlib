@@ -1,11 +1,5 @@
-/.gitignore
-/3.4.5
-/3.4.6
-/devel
-/tools
-/cryptlib-tools.tar.gz
-/cryptlib-tests.tar.gz
-/cryptlib-perlfiles.tar.gz
-/NEWPACKAGE
-/cl346_fedora.zip
 /cl346_fedora.zip.sig
+/cl346_fedora.zip
+/cryptlib-perlfiles.tar.gz
+/cryptlib-tests.tar.gz
+/cryptlib-tools.tar.gz
