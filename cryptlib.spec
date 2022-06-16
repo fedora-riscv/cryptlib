@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    10%{?dist}
+Release:    11%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -346,6 +346,9 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/claes.1  %{buildroot}%{_mandir}/man1
 
 
 %changelog
+* Thu Jun 16 2022 Python Maint <python-maint@redhat.com> - 3.4.6-11
+- Rebuilt for Python 3.11
+
 * Wed Jun 15 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-10
 - Add claes ver 1.0 to cryptlib-tools
 
