@@ -157,12 +157,12 @@ mkdir %{name}-%{version}
 cd %{name}-%{version}
 /usr/bin/unzip -a %{SOURCE0}
 
-%patch 1 -p1
-%patch 2 -p1
-%patch 3 -p1
-%patch 4 -p1
-%patch 5 -p1
-%patch 6 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 # remove pre-build jar file
 rm %{_builddir}/%{name}-%{version}/bindings/cryptlib.jar
@@ -351,7 +351,7 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/claes.1  %{buildroot}%{_mandir}/man1
 
 
 %changelog
-* Wed Apr 04 2023 Ralf Senderek <innovation@senderek.ie> - 3.4.6-15
+* Wed Apr 05 2023 Ralf Senderek <innovation@senderek.ie> - 3.4.6-15
 - Resolve Bug RHBZ#2182688
 
 * Thu Jan 19 2023 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.6-14
