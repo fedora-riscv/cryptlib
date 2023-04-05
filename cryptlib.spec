@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    15%{?dist}
+Release:    16%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -73,7 +73,6 @@ operating system - cryptlib doesn't tie you to a single system.
 This allows email, files and EDI transactions to be authenticated with
 digital signatures and encrypted in an industry-standard format.
 
-At the moment Cryptlib supports x86-64-v3 in Fedora.
 
 %package devel
 Summary:  Cryptlib application development files 
@@ -351,6 +350,9 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/claes.1  %{buildroot}%{_mandir}/man1
 
 
 %changelog
+* Wed Apr 05 2023 Ralf Senderek <innovation@senderek.ie> - 3.4.6-16
+- Remove obsolete gcc flags
+
 * Wed Apr 05 2023 Ralf Senderek <innovation@senderek.ie> - 3.4.6-15
 - Resolve Bug RHBZ#2182688
 
