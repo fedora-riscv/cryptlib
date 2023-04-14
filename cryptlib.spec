@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.6  
-Release:    8%{?dist}
+Release:    9%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -28,7 +28,7 @@ Patch1:     flagspatch
 Patch2:     configpatch
 Patch3:     errorpatch
 Patch4:     testpatch
-Patch5:     x86-64patch
+Patch5:     m64patch
 
 ExclusiveArch: x86_64 aarch64 ppc64le
 
@@ -346,6 +346,9 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/claes.1  %{buildroot}%{_mandir}/man1
 
 
 %changelog
+* Fri Apr 14 2023 Ralf Senderek <innovation@senderek.ie> - 3.4.6-9
+- Resolve RHBZ#2182688
+
 * Sun Jun 12 2022 Ralf Senderek <innovation@senderek.ie> - 3.4.6-8
 - Add claes ver 1.0 to cryptlib-tools
 

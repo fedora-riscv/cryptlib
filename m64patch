@@ -1,11 +1,11 @@
 --- cl-original/tools/ccopts.sh	2022-03-04 19:32:14.000000000 +0100
-+++ cl-patched/tools/ccopts.sh	2022-03-05 21:02:44.503759431 +0100
++++ cl-patched/tools/ccopts.sh	2023-04-05 11:19:59.034814258 +0200
 @@ -897,7 +897,7 @@
  		if [ $GENERICBUILD -gt 0 ] ; then
  			echo "  (Enabling lowest-common-denominator build options for cross-platform library)." >&2 ;
  		else
 -			CCARGS="$CCARGS -march=native -mtune=generic" ;
-+			CCARGS="$CCARGS -march=x86-64-v3 -mtune=generic" ;
++			CCARGS="$CCARGS -m64 -mtune=generic" ;
  		fi
  		if [ "$ARCH" = "x86_64" ] ; then
  			CCARGS="$CCARGS -fPIC" ;
