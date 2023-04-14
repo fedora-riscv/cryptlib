@@ -1,11 +1,11 @@
---- cl-original/makefile	2021-12-03 15:53:24.172492715 +0100
-+++ cl-patched/makefile	2022-02-01 14:19:42.814855266 +0100
+--- cl-original/makefile	2021-12-03 15:53:24.000000000 +0100
++++ cl-patched/makefile	2023-04-05 18:00:03.627181152 +0200
 @@ -92,7 +92,7 @@
  #
  # Standard build flags
  
 -CFLAGS			= -c -D__UNIX__ -DNDEBUG -I.
-+CFLAGS			= -c -D__UNIX__ -DNDEBUG -I. $(ADDFLAGS) -ggdb3 -fno-omit-frame-pointer -O1
++CFLAGS			= -c -D__UNIX__ -DNDEBUG -I. $(ADDFLAGS)
  CFLAGS_DEBUG	= -c -D__UNIX__ -I. -g -O1
  CFLAGS_DEBUGGCC	= -c -D__UNIX__ -I. -ggdb3 -fno-omit-frame-pointer -O1
  
