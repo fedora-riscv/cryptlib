@@ -1,0 +1,44 @@
+--- cl-original/tools/cryptlibConverter.py3	2022-12-21 10:40:50.135387393 +0100
++++ cl-patched/tools/cryptlibConverter.py3	2022-12-21 10:42:40.981182722 +0100
+@@ -659,7 +659,7 @@
+     sModFuncs = ""
+     setupPy = r"""#!/usr/bin/env python
+ 
+-from distutils.core import setup, Extension
++from setuptools import setup, Extension
+ import sys
+ 
+ if sys.platform == "win32":
+--- cl-original/tools/cryptlibConverter.py3.ansi	2022-12-21 10:40:50.135387393 +0100
++++ cl-patched/tools/cryptlibConverter.py3.ansi	2022-12-21 10:43:03.468140373 +0100
+@@ -659,7 +659,7 @@
+     sModFuncs = ""
+     setupPy = r"""#!/usr/bin/env python
+ 
+-from distutils.core import setup, Extension
++from setuptools import setup, Extension
+ import sys
+ 
+ if sys.platform == "win32":
+--- cl-original/tools/cryptlibConverter.py3.unicode	2022-12-21 10:40:50.135387393 +0100
++++ cl-patched/tools/cryptlibConverter.py3.unicode	2022-12-21 10:43:23.223103178 +0100
+@@ -659,7 +659,7 @@
+     sModFuncs = ""
+     setupPy = r"""#!/usr/bin/env python
+ 
+-from distutils.core import setup, Extension
++from setuptools import setup, Extension
+ import sys
+ 
+ if sys.platform == "win32":
+--- cl-original/tools/cryptlibConverter.py3.utf	2022-12-21 10:40:50.136387391 +0100
++++ cl-patched/tools/cryptlibConverter.py3.utf	2022-12-21 10:43:41.031069639 +0100
+@@ -659,7 +659,7 @@
+     sModFuncs = ""
+     setupPy = r"""#!/usr/bin/env python
+ 
+-from distutils.core import setup, Extension
++from setuptools import setup, Extension
+ import sys
+ 
+ if sys.platform == "win32":
