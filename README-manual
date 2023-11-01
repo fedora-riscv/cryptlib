@@ -17,7 +17,7 @@ the Fedora distribution.
 But the good news is, that you can download this excellent manual as a
 PDF file from Peter's web page.
 
-https://cryptlib.com/downloads/manual.pdf
+https://cryptlib-release.s3-ap-southeast-1.amazonaws.com/manual.pdf
 
 If you refer to the numerous code examples, you will be able to use
 cryptlib in your own (commercial) projects quite easily.
