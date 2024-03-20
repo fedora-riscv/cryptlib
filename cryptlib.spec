@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.7  
-Release:    5%{?dist}
+Release:    5.rv64%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -28,7 +28,7 @@ Source9:    cryptlibConverter.py3-final
 Patch0:     m64patch
 Patch1:     testpatch
 
-ExclusiveArch: x86_64 aarch64 ppc64le
+ExclusiveArch: x86_64 aarch64 ppc64le riscv64
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
