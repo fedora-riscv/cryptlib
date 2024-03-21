@@ -5,7 +5,7 @@
 
 Name:       cryptlib
 Version:    3.4.7  
-Release:    5%{?dist}
+Release:    6%{?dist}
 Summary:    Security library and toolkit for encryption and authentication services    
 
 License:    Sleepycat and OpenSSL     
@@ -28,7 +28,7 @@ Source9:    cryptlibConverter.py3-final
 Patch0:     m64patch
 Patch1:     testpatch
 
-ExclusiveArch: x86_64 aarch64 ppc64le
+ExclusiveArch: x86_64 aarch64 ppc64le riscv64
 
 BuildRequires: gcc 
 BuildRequires: libbsd-devel   
@@ -358,6 +358,9 @@ cp /%{buildroot}%{cryptlibdir}/tools/man/clsmime.1 %{buildroot}%{_mandir}/man1
 
 
 %changelog
+* Thu Mar 21 2024 Jiasheng Zhao <JasenChao@gmail.com> - 3.4.7-6
+- Add riscv64 support
+
 * Tue Feb 27 2024 Jiri Vanek <jvanek@redhat.com> - 3.4.7-5
 - Rebuilt for java-21-openjdk as system jdk
 
